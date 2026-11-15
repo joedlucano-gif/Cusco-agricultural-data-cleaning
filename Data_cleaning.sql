@@ -60,6 +60,10 @@ FINAL AS (
         OR Code_Status = 'Review'
         OR Ubigeo_Status = 'Review'
       THEN 'Review'
+
+      WHEN Yield_Consistency_Status = 'Not checked'
+      THEN 'Not checked'
+
       ELSE 'OK'
     END AS Overall_Status
   FROM CONSISTENCY
