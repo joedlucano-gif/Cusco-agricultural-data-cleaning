@@ -40,13 +40,30 @@ QUALITY AS (
 
   FROM CLEAN),
 
-FINAL AS 
-(SELECT * ,
-   CASE 
-     WHEN Yield_Status = 'Review' OR Code_Status = 'Review'OR Ubigeo_Status = 'Review' 
-     THEN 'Review' 
-     ELSE 'OK' 
-   END AS Overall_Status FROM QUALITY)
+CONSISTENCY AS (
+  SELECT *,
+    CASE
+      WHEN Yield_Calculated IS NULL
+        OR Yield_Cleaned IS NULL
+      THEN 'Not checked'
+      WHEN ABS(Yield_Calculated - Yield_Cleaned) > 0.01
+      THEN 'Review'
+      ELSE 'OK'
+    END AS Yield_Consistency_Status
+  FROM QUALITY),
 
-SELECT * 
-FROM FINAL  
+FINAL AS (
+  SELECT *,
+    CASE
+      WHEN Yield_Status = 'Review'
+        OR Yield_Consistency_Status = 'Review'
+        OR Code_Status = 'Review'
+        OR Ubigeo_Status = 'Review'
+      THEN 'Review'
+      ELSE 'OK'
+    END AS Overall_Status
+  FROM CONSISTENCY
+)
+
+SELECT *
+FROM FINAL;
