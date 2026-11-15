@@ -1,2 +1,2 @@
-# cusco-agriculturure-data-cleaning
+# cusco-agricultural-data-cleaning
 SQL query used to clean and validate agricultural production data usin Google BigQuery
