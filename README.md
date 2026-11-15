@@ -23,6 +23,7 @@ Cleaning and validating **3,672 agricultural production records from Cusco, Peru
 ## Key Findings
 
 | Metric | Result |
+|---|---:|
 | Total records | 3,672 |
 | Passed initial checks | 3,595 |
 | Flagged for review | 77 |
