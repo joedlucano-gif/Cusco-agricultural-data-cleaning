@@ -69,5 +69,7 @@ FINAL AS (
   FROM CONSISTENCY
 )
 
-SELECT *
+SELECT *, SAFE_DIVIDE(Yield_Cleaned * Cosechada, 1000)
+    AS Total_Yield_Tonnes
 FROM FINAL;
+
